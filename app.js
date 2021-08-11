@@ -5,7 +5,7 @@ const currencyFormatter = require('currency-formatter');
 const app = express();
 app.use(express.urlencoded({extended:true}));
 const mongodb = 'mongodb+srv://riches22:biro123save@cluster0.41mur.mongodb.net/item-database?retryWrites=true&w=majority';
-mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex:true })
         .then(() => console.log('Database Connected'),
         app.listen(3005, (()=>{
             console.log('http://localhost:3005');
