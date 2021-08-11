@@ -1,0 +1,19 @@
+<% const title = 'CRUD' %>
+<style>
+    .sidenav{
+        height: 200px;
+    }
+</style>
+<nav>
+    <div class="nav-wrapper container">
+        <a href="/" class="brand-logo"><%= title %></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/add-item">Add Item</a></li>
+        </ul>
+    </div>
+</nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="/add-item">Add Item</a></li>
+  </ul>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+      <div class="container center-align">
+        <div class="row">
+            <div class="col offset-m3 s12 m6">
+              <div class="card green darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title"><%= item.name %></span>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red" href="/delete/<%= item.id %>"><i class="material-icons">delete</i></a>
+                  <p>This is a very quality product that you will enjoy anytime you buy it. Always buy from our store and 
+                      you will see the beauty of original products and services.<br>
+                      price
+                  </p>
+                </div>
+                <div class="card-action">
+                  <i class="white-text"><%= currencyFormatter.format(item.price, { code: 'USD' }) %></i>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div style="height: 143px;"></div>
+      <%- include('./partials/footer.ejs') %>
+  </body>
+
+</html>

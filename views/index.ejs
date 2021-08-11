@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+  <body>
+    <%- include('./partials/nav.ejs') %>
+      <div class="container">
+        <% if (record.length> 0) { %>
+          <table id="itemContainer">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Item Name</th>
+                <th>Item Price</th>
+                <th>View Full Item</th>
+                <th>Edit Item</th>
+                <th>Delete Item</th>
+              </tr>
+            </thead>
+            <% record.forEach((item, sn)=> { %>
+              <tbody>
+                <tr>
+                  <td>
+                    <%= sn+1 %>
+                  </td>
+                  <td>
+                    <%= item.name %>
+                  </td>
+                  <td>
+                    <%= currencyFormatter.format(item.price, { code: 'USD' }) %>
+                  </td>
+                  <td><a href="/one-item/<%= item.id %>" class="green-text"><i class="material-icons">remove_red_eye</i></a></td>
+                  <td><a href="#modal1" class="blue-text modal-trigger"><i data-id="<%= item.id %>" class="material-icons">edit</i></a></td>
+                  <td><a href="/delete/<%= item.id %>" class="red-text"><i class="material-icons">delete</i></a></td>
+                </tr>
+                <% }); %>
+              </tbody>
+          </table>
+          <% }else{ %>
+            <h1 class="center-align">There are no Items</h1>
+            <% } %>
+      </div>
+      <div style="height: 50px;"></div>
+      <%- include('./partials/footer.ejs') %>
+      <%- include('./partials/modal.ejs') %>
+      <script>
+        let updateId;
+        modal1.onsubmit = async function(e){
+          e.preventDefault();
+          let data = new FormData(edit_form);
+          let response = await fetch(`/items/${updateId}`, {
+            method:'PUT',
+            body: new URLSearchParams(data),
+            headers:new Headers({
+              'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            })
+          })
+          let result = await response.json();
+          edit_form.reset();
+          window.location.reload();
+          alert(result.msg);
+        }
+        itemContainer.onclick = function(e){
+          let value = e.target.textContent;
+          if (value === 'edit') {
+            updateId = e.target.getAttribute('data-id');
+            console.log(updateId);
+          }
+        }
+    </script>
+  </body>
+
+</html>
